@@ -19,6 +19,8 @@
             <p class="fecha">FECHA:25-05-2018</p>
             <p class="nombre">BY: NOMBRE DE PRUEBA</p>
             <button id="capture" v-on:click="capture">Capture</button>
+            <input type='file' v-on:change="readURL" />
+            <img id="blah" src="#" alt="your image" />
         </div>
     </div>
 </template>
@@ -38,11 +40,22 @@ export default {
       var elemento = document.getElementsByClassName("banner")[0];
       domtoimage.toJpeg(elemento, { quality: 0.95 })
         .then(function (dataUrl) {
+            alert("Error con ejecución");
             var link = document.createElement('a');
-            link.download = 'my-image-name.jpeg';
+            link.download = 'banner.jpeg';
             link.href = dataUrl;
             link.click();
         });
+    },
+    readURL: function(e) {
+      if (e.target.files && e.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('.portada')
+            .css('background-image', 'url(' + e.target.result + ')');
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
     }
 
   }
