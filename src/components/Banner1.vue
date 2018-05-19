@@ -2,7 +2,7 @@
     <div class="banner">
         <div class="portada">
             <div class="contenido">
-                    <div class="logo"><img src="../assets/logo04.png" alt="" class="logotipo"></div>
+                    <div class="logo"></div>
                     <h1 class="titulo">TITULO</h1>
                     <p class="resumen">TEXTO INFORMATIVO TEXTO INFORMATIVO.
                             TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO 
@@ -18,17 +18,33 @@
         <div class="membrete">
             <p class="fecha">FECHA:25-05-2018</p>
             <p class="nombre">BY: NOMBRE DE PRUEBA</p>
+            <button id="capture" v-on:click="capture">Capture</button>
         </div>
     </div>
 </template>
 
 <script>
+import domtoimage from 'dom-to-image';
+
 export default {
   name: 'Banner1',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods: {
+    capture: function(event){
+      var elemento = document.getElementsByClassName("banner")[0];
+      domtoimage.toJpeg(elemento, { quality: 0.95 })
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'my-image-name.jpeg';
+            link.href = dataUrl;
+            link.click();
+        });
+    }
+
   }
 }
 </script>
@@ -48,6 +64,7 @@ export default {
     position: relative;
     width: 2000px;
     height: 800px;
+
   
 }
 .titulo{
@@ -77,8 +94,11 @@ export default {
     background: linear-gradient(to right, #c70039 , #ff5733);
     opacity: 0.8;
 }
+.portada{
+  position: relative;
+}
 
-.portada .contenido  {
+.contenido  {
     position: relative;
     z-index: 9999999999999999999999999999999;
 }
@@ -120,11 +140,13 @@ export default {
 .logo{
     position: relative;
     float: right;
-    width: 347px;
+    width: 251;
+    height: 251;
     margin-top: 30px;
-}
-.logo .logotipo{
-    width: 251px;
+    z-index: 99999;
 
+    background-image: url("../assets/logo04.png");
+    background-size: contain; 
+    background-repeat: no-repeat;
 }
 </style>
