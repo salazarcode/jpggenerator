@@ -1,61 +1,18 @@
 <template>
-    <div class="banner">
-        <div class="portada">
-            <div class="contenido">
-                    <!--<div class="logo"><img src="../assets/logo04.png" alt="" class="logotipo"></div>-->
-                    <h1 class="titulo">TITULO</h1>
-                    <p class="resumen">TEXTO INFORMATIVO TEXTO INFORMATIVO.
-                            TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO 
-                            TEXTO 
-                            INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO 
-            </p>
-            </div>
-        </div>
-            
-        <div class="correo">
-            <p class="correotext">INFO@LOBSTERBLUM.IO</p>
-        </div>
-        <div class="membrete">
-            <p class="fecha">FECHA:25-05-2018</p>
-            <p class="nombre">BY: NOMBRE DE PRUEBA</p>
-            <button id="capture" v-on:click="capture">Capture</button>
-            <input type='file' v-on:change="readURL" />
-        </div>
+    <div class="screen1">
+        Hola Screen1 {{ msg }}
     </div>
 </template>
 
 <script>
-import domtoimage from 'dom-to-image';
-
 export default {
-  name: 'Banner1',
+  name: 'Screen1',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
   },
   methods: {
-    capture: function(event){
-      var elemento = document.querySelector(".banner");
-      domtoimage.toJpeg(elemento, { quality: 0.95 })
-        .then(function (dataUrl) {
-            var link = document.createElement('a');
-            link.download = 'banner.jpeg';
-            link.href = dataUrl;
-            link.click();
-        });
-    },
-    readURL: function(e) {
-      if (e.target.files && e.target.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $('.portada')
-            .css('background-image', 'url(' + e.target.result + ')');
-        };
-        reader.readAsDataURL(e.target.files[0]);
-      }
-    }
-
   }
 }
 </script>
