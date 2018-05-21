@@ -2,7 +2,9 @@
     <div class="banner">
         <div class="portada">
             <div class="contenido">
-                    <!--<div class="logo"><img src="../assets/logo04.png" alt="" class="logotipo"></div>-->
+                    <div class="logo">
+                        <img src="static/logo04.png" alt="" class="logotipo">
+                    </div>
                     <h1 class="titulo">TITULO</h1>
                     <p class="resumen">TEXTO INFORMATIVO TEXTO INFORMATIVO.
                             TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO 
