@@ -1,38 +1,29 @@
 <template>
-<div class="all">
     <div class="banner">
         <div class="portada">
             <div class="contenido">
                     <div class="logo">
                         <img src="static/logo04.png" alt="" class="logotipo">
                     </div>
-                    <h1 class="titulo">{{ titulo }}</h1>
-                    <p class="resumen">{{ resumen }}</p>
+                    <h1 class="titulo">TITULO</h1>
+                    <p class="resumen">TEXTO INFORMATIVO TEXTO INFORMATIVO.
+                            TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO 
+                            TEXTO 
+                            INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO 
+            </p>
             </div>
         </div>
             
         <div class="correo">
-            <p class="correotext">{{correoText}}</p>
+            <p class="correotext">INFO@LOBSTERBLUM.IO</p>
         </div>
         <div class="membrete">
-            <p class="fecha">{{fecha}}</p>
-            <p class="nombre">{{nombre}}</p>
+            <p class="fecha">FECHA:25-05-2018</p>
+            <p class="nombre">BY: NOMBRE DE PRUEBA</p>
+            <button id="capture" v-on:click="capture">Capture</button>
+            <input type='file' v-on:change="readURL" />
         </div>
     </div>
-
-    <div class="sidebar">
-        <h1>Editar contenido</h1>
-        <input type="text" v-model="titulo" id="titulo">
-        <input type="text" v-model="resumen" id="resumen">
-        <input type="text" v-model="correoText" id="correoText">
-        <input type="text" v-model="fecha" id="fecha">
-        <input type="text" v-model="nombre" id="nombre">
-        <input type='file' v-on:change="readURL" />
-        <router-link to="/">Cancelar</router-link>
-        <button id="capture" v-on:click="capture">Listo</button>
-    </div>
-</div>
-
 </template>
 
 <script>
@@ -42,11 +33,7 @@ export default {
   name: 'Banner1',
   data () {
     return {
-      titulo: 'Mardito Maduro',
-      resumen: 'TEXTO INFORMATIVO TEXTO INFORMATIVO.TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO',
-      correoText: 'INFO@LOBSTERBLUM.IO',
-      fecha: 'FECHA:25-05-2018',
-      nombre: 'BY: NOMBRE DE PRUEBA'
+      msg: 'Welcome to Your Vue.js App'
     }
   },
   methods: {
@@ -82,8 +69,6 @@ export default {
     width: 2000px;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 15px;
-    /*transition: ease-in 0.3s;*/
-    transform: scale(0.5);
 }
 .portada {
     background-image: url("../assets/gente.jpg");
