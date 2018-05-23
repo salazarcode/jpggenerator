@@ -1,48 +1,77 @@
 <template>
 <div class="all">
-    <div class="banner">
-        <div class="portada">
-            <div class="contenido">
-                    <div class="logo">
-                        <img src="static/logo04.png" alt="" class="logotipo">
+    <div class="leftContent">
+        <div class="header"><img class="logo_header" src="static/logo04.png" alt=""></div>
+        <div class="cajaBanner">
+
+            <div id="banner" class="banner editable">
+                <div class="portada">
+                    <div class="contenido">
+                            <div class="logo">
+                                <img src="static/logo04.png" alt="" class="logotipo">
+                            </div>
+                            <h1 class="titulo">{{ titulo }}</h1>
+                            <p class="resumen">{{ resumen }}</p>
                     </div>
-                    <h1 class="titulo">{{ titulo }}</h1>
-                    <p class="resumen">{{ resumen }}</p>
+                </div>
+                    
+                <div class="correo">
+                    <p class="correotext">{{correoText}}</p>
+                </div>
+                <div class="membrete">
+                    <p class="fecha">{{fecha}}</p>
+                    <p class="nombre">{{nombre}}</p>
+                </div>
             </div>
-        </div>
-            
-        <div class="correo">
-            <p class="correotext">{{correoText}}</p>
-        </div>
-        <div class="membrete">
-            <p class="fecha">{{fecha}}</p>
-            <p class="nombre">{{nombre}}</p>
+
         </div>
     </div>
 
-    <div class="sidebar">
-        <h1>Editar contenido</h1>
-        <input type="text" v-model="titulo" id="titulo">
-        <input type="text" v-model="resumen" id="resumen">
-        <input type="text" v-model="correoText" id="correoText">
-        <input type="text" v-model="fecha" id="fecha">
-        <input type="text" v-model="nombre" id="nombre">
-        <input type='file' v-on:change="readURL" />
-        <router-link to="/">Cancelar</router-link>
-        <button id="capture" v-on:click="capture">Listo</button>
+
+    <div class="rightContent">
+        <div class="franjaColor">
+            <div class="bloqueColor color1"></div>
+            <div class="bloqueColor color2"></div>
+            <div class="bloqueColor color3"></div>
+            <div class="bloqueColor color4"></div>
+            <div class="bloqueColor color5"></div>
+        </div>
+        <div class="sidebar">
+            <h1 style="color:#42020c">Editar contenido</h1>
+
+            <br><br>
+
+            <input class="textInputs" type="text" v-model="titulo" id="titulo"><br><br>
+
+            <textarea class="textInputs textArea" rows="4" cols="80">{{resumen}}</textarea>
+            
+            <input class="textInputs" type="text" v-model="correoText" id="correoText"><br><br>
+            <input class="textInputs" type="textarea" v-model="fecha" id="fecha"><br><br>
+
+            <input class="textInputs" type="text" v-model="nombre" id="nombre"><br><br>
+
+            <label for="fondo">Imagen de fondo:</label>
+            <input id="fondo" type='file' v-on:change="readURL" />
+
+
+            <!--<router-link to="/">Cancelar</router-link>-->
+            <button id="calcelar" @click="volver">Cancelar</button>
+            <button id="capture" @click="capture">Listo</button>
+        </div>
     </div>
+
 </div>
 
 </template>
 
 <script>
-import domtoimage from 'dom-to-image';
 
+import domtoimage from 'dom-to-image';
 export default {
   name: 'Banner1',
   data () {
     return {
-      titulo: 'Mardito Maduro',
+      titulo: 'Cualquier título',
       resumen: 'TEXTO INFORMATIVO TEXTO INFORMATIVO.TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO TEXTO INFORMATIVO',
       correoText: 'INFO@LOBSTERBLUM.IO',
       fecha: 'FECHA:25-05-2018',
@@ -50,25 +79,33 @@ export default {
     }
   },
   methods: {
-    capture: function(event){
-      var elemento = document.querySelector(".banner");
-      domtoimage.toJpeg(elemento, { quality: 0.95 })
+    capture: function(e){
+        var elemento =  document.getElementById("banner");
+        elemento.className = "banner";
+        this.capture1(elemento);
+    },
+    capture1: function(elemento){
+
+        //var elemento =  document.getElementById("banner");
+        domtoimage.toJpeg(elemento,{quality: 0.95})
         .then(function (dataUrl) {
-            var link = document.createElement('a');
-            link.download = 'banner.jpeg';
-            link.href = dataUrl;
-            link.click();
+               var link = document.createElement('a');
+               link.download = 'banner.jpeg';
+               link.href = dataUrl;
+               link.click();
         });
     },
     readURL: function(e) {
       if (e.target.files && e.target.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          $('.portada')
-            .css('background-image', 'url(' + e.target.result + ')');
+          $('.portada').css('background-image', 'url(' + e.target.result + ')');
         };
         reader.readAsDataURL(e.target.files[0]);
       }
+    },
+    volver: function(){
+        this.$router.push("/");
     }
 
   }
@@ -77,13 +114,102 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.textInputs{
+    margin-top: 20px;
+    height: 30px;
+    width: 80%;
+    margin: auto;
+
+    border: 5px solid white;
+    padding: 5px; 
+    box-shadow: 5px 10px rgba(224, 221, 213, 0.3);
+}
+
+.textArea{
+    height: 150px;
+}
+
+.cajaBanner{
+    position:relative;
+    top: 20%;
+    margin: auto;
+    height: 300px;
+    width: 800px;
+}
+
+.bloqueColor{
+    position: relative;
+    height: 20%;
+    width: inherit;
+}
+
+.color1{ background-color: #edbc1c }
+.color2{ background-color: #c64b11 }
+.color3{ background-color: #c10723 }
+.color4{ background-color: #87091c }
+.color5{ background-color: #42020c }
+
+.franjaColor{
+    position: relative;
+    float: left;
+    height: inherit;
+    width: 5px;
+    background-color: red;
+}
+
+.all{
+    position:absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.leftContent{
+    float:left;
+    position: relative;
+    height: inherit;
+    width: 70%;
+    overflow: auto;
+    background-color: #3d3f42;
+}
+
+.rightContent{
+    float: left;
+    position: relative;
+    padding: 0;
+    height: inherit;
+    width: 30%;
+    overflow: auto;
+    background-color: rgb(247,247,247);
+}
+
+.sidebar{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.logo_header{
+    position: relative;
+    top: 35px;
+    left: 35px;
+    display: block;
+    height: 80px;
+    width: auto;
+}
+
 .banner {
+    position: absolute;
     height: 1000px;
     width: 2000px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat,sans-serif;
     letter-spacing: 15px;
-    /*transition: ease-in 0.3s;*/
-    transform: scale(0.5);
+    transition: .3s ease-in;
+}
+
+.editable {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(.35);
 }
 .portada {
     background-image: url("../assets/gente.jpg");
