@@ -1,5 +1,9 @@
 <template>
 <div class="all">
+
+  <div class="header">
+    <img class="logo_header" src="static/logo04.png" alt="">
+  </div>
   <router-link to="/banner-1">
     <img src="static/banners-1.jpg" alt="">
   </router-link>
@@ -43,5 +47,43 @@ export default {
 
 
 <style scoped>
+
+.all{
+  top:15px;
+  position: relative;
+  margin: auto;
+  height: auto;
+  width: 75%;
+  background-color: #3d3f42;
+}
+
+.all img{
+
+  transform: scale(0.95);
+  transition: transform 0.2s;
+}
+
+.all img:hover{
+  transform: scale(1);
+}
+.header{
+  position:relative;
+  display: block;
+  float: left;
+  height: auto;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.logo_header{
+    position: relative;
+    display: block;
+    top: 35px;
+    left: 35px;
+    display: block;
+    height: 80px;
+    width: auto;
+}
+
 
 </style>
